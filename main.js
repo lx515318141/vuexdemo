@@ -2,8 +2,8 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import store from './store/index'
-
+import defaultstore from './store'
+const store = defaultstore()
 
 Vue.prototype.Hello = "Hello"
 // 挂载在vue原型上的，就是全局对象
@@ -12,7 +12,13 @@ Vue.prototype.Hello = "Hello"
 
 Vue.config.productionTip = false
 
+store.registerModule('myModule', {
+  store:{
+    myModulecount:10000
+  }
+})
 
+store.unregisterModule("myModule")
 
 /* eslint-disable no-new */
 new Vue({
